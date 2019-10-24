@@ -17,12 +17,8 @@ import com.example.tpo_5_lucero_pedro_29887502.ui.registro.RegistroActivity;
 
 public class ViewModelMain extends AndroidViewModel {
 
-    Usuario usuario;
-
-
-
-    Context context;
-
+    private Usuario usuario;
+    private Context context;
     private MutableLiveData<String> estadoLiveData;
 
     public ViewModelMain(@NonNull Application application) {
@@ -41,6 +37,7 @@ public class ViewModelMain extends AndroidViewModel {
         } else {
             Intent intent = new Intent(context, RegistroActivity.class);
             intent.putExtra("usuario", usuario);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

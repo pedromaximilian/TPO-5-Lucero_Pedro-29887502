@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                startActivity(new Intent(getApplicationContext(), RegistroActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegistroActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
