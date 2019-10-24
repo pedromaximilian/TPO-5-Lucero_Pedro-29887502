@@ -38,7 +38,8 @@ public class RegistroActivity extends AppCompatActivity {
     private void configView() {
 
         usuario = new Usuario();
-        usuario = ApiClient.leer(getApplicationContext());
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+
         liveDataUsuarioViewModel = ViewModelProviders.of(this).get(LiveDataUsuarioViewModel.class);
 
 
@@ -66,14 +67,15 @@ public class RegistroActivity extends AppCompatActivity {
             }
 
         });
-        /*
-        etDni.setText(String.valueOf(usuario.getDni()));
-        etApellido.setText(String.valueOf(usuario.getApellido()));
-        etNombre.setText(usuario.getNombre());
-        etEmail.setText(usuario.getMail());
-        etPassword.setText(usuario.getPassword());
 
-         */
+        if (usuario!=null){
+            etDni.setText(String.valueOf(usuario.getDni()));
+            etApellido.setText(String.valueOf(usuario.getApellido()));
+            etNombre.setText(usuario.getNombre());
+            etEmail.setText(usuario.getMail());
+            etPassword.setText(usuario.getPassword());
+        }
+
 
 
 

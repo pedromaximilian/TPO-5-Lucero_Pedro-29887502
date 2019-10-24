@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 if (usuario==null){
                     Toast.makeText(MainActivity.this, "Verifique Contraseña", Toast.LENGTH_LONG).show();
                 }else{
-                    startActivity(new Intent(getApplicationContext(), RegistroActivity.class));
+                    Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+                    intent.putExtra("usuario", usuario);
+                    startActivity(intent);
                 }
 
             }
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 startActivity(new Intent(getApplicationContext(), RegistroActivity.class));
             }
         });
