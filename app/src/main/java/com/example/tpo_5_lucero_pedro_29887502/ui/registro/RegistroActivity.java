@@ -25,13 +25,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     Usuario usuario;
 
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +54,14 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+/*
                 usuario.setDni(Long.parseLong(etDni.getText().toString()));
                 usuario.setApellido(etApellido.getText().toString());
                 usuario.setNombre(etNombre.getText().toString());
                 usuario.setMail(etEmail.getText().toString());
                 usuario.setPassword(etPassword.getText().toString());
 
-
+*/
                 ApiClient.guardar(getApplicationContext(), usuario);
             }
 
@@ -76,7 +69,7 @@ public class RegistroActivity extends AppCompatActivity {
         etDni.setText(String.valueOf(usuario.getDni()));
         etApellido.setText(String.valueOf(usuario.getApellido()));
         etNombre.setText(usuario.getNombre());
-        etEmail.setText(usuario.getMail()+"");
+        etEmail.setText(usuario.getMail());
         etPassword.setText(usuario.getPassword());
 
 
@@ -85,16 +78,20 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onChanged(Usuario usuario) {
                 if (usuario!=null){
-                    etDni.setText(String.valueOf(usuario.getDni())+"");
-                    etApellido.setText(String.valueOf(usuario.getApellido())+"");
-                    etNombre.setText(usuario.getNombre()+"");
-                    etEmail.setText(usuario.getMail()+"");
-                    etPassword.setText(usuario.getPassword()+"");
+                    etDni.setText(String.valueOf(usuario.getDni()));
+                    etApellido.setText(String.valueOf(usuario.getApellido()));
+                    etNombre.setText(usuario.getNombre());
+                    etEmail.setText(usuario.getMail());
+                    etPassword.setText(usuario.getPassword());
                 }
             }
         };
 
-        liveDataUsuarioViewModel.getUsuario().observe(this, usuarioObserver);
+        if (usuario!=null){
+            liveDataUsuarioViewModel.getUsuario().observe(this, usuarioObserver);
+        }
+
+
 
 
     }

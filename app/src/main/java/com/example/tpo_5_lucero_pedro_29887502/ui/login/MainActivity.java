@@ -1,6 +1,8 @@
 package com.example.tpo_5_lucero_pedro_29887502.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +12,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tpo_5_lucero_pedro_29887502.R;
+import com.example.tpo_5_lucero_pedro_29887502.model.LiveDataUsuarioViewModel;
 import com.example.tpo_5_lucero_pedro_29887502.model.Usuario;
 import com.example.tpo_5_lucero_pedro_29887502.request.ApiClient;
 import com.example.tpo_5_lucero_pedro_29887502.ui.registro.RegistroActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private LiveDataUsuarioViewModel liveDataUsuarioViewModel;
 
     Usuario usuario;
 
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void configView() {
 
+        usuario = new Usuario();
+        liveDataUsuarioViewModel = ViewModelProviders.of(this).get(LiveDataUsuarioViewModel.class);
 
         etMail = findViewById(R.id.etmail_login);
         etPass = findViewById(R.id.etpassword_login);
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usuario = new Usuario();
+
                 usuario = ApiClient.login(getApplicationContext(), etMail.getText().toString(), etPass.getText().toString());
                 if (usuario==null){
                     Toast.makeText(MainActivity.this, "Verifique Contraseña", Toast.LENGTH_LONG).show();
@@ -56,6 +62,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RegistroActivity.class));
             }
         });
+
+
+        final Observer<Usuario> usuarioObserverLogin = new Observer<Usuario>() {
+            @Override
+            public void onChanged(Usuario usuario) {
+                if (usuario!=null){
+                    etMail.setText(usuario.getMail());
+                    etPass.setText(usuario.getPassword());
+                }
+            }
+        };
+
+        liveDataUsuarioViewModel.getUsuario().observe(this, usuarioObserverLogin);
 
 
     }//end configView()
