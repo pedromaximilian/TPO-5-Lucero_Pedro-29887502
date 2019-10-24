@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tpo_5_lucero_pedro_29887502.R;
 import com.example.tpo_5_lucero_pedro_29887502.model.LiveDataUsuarioViewModel;
@@ -22,7 +23,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     private LiveDataUsuarioViewModel liveDataUsuarioViewModel;
 
-    Usuario usuario = new Usuario();
+    Usuario usuario;
 
 
 
@@ -48,6 +49,8 @@ public class RegistroActivity extends AppCompatActivity {
         liveDataUsuarioViewModel = ViewModelProviders.of(this).get(LiveDataUsuarioViewModel.class);
 
 
+
+
         etDni = findViewById(R.id.etRegistro_dni);
         etNombre = findViewById(R.id.etRegistro_nombre);
         etApellido = findViewById(R.id.etRegistro_apellido);
@@ -58,8 +61,6 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                Usuario usuario = new Usuario();
 
                 usuario.setDni(Long.parseLong(etDni.getText().toString()));
                 usuario.setApellido(etApellido.getText().toString());
@@ -72,6 +73,12 @@ public class RegistroActivity extends AppCompatActivity {
             }
 
         });
+        etDni.setText(String.valueOf(usuario.getDni()));
+        etApellido.setText(String.valueOf(usuario.getApellido()));
+        etNombre.setText(usuario.getNombre());
+        etEmail.setText(usuario.getMail()+"");
+        etPassword.setText(usuario.getPassword());
+
 
 
         final Observer<Usuario> usuarioObserver = new Observer<Usuario>() {
