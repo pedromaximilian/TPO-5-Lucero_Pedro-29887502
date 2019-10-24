@@ -54,23 +54,26 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-/*
+
                 usuario.setDni(Long.parseLong(etDni.getText().toString()));
                 usuario.setApellido(etApellido.getText().toString());
                 usuario.setNombre(etNombre.getText().toString());
                 usuario.setMail(etEmail.getText().toString());
                 usuario.setPassword(etPassword.getText().toString());
 
-*/
+
                 ApiClient.guardar(getApplicationContext(), usuario);
             }
 
         });
+        /*
         etDni.setText(String.valueOf(usuario.getDni()));
         etApellido.setText(String.valueOf(usuario.getApellido()));
         etNombre.setText(usuario.getNombre());
         etEmail.setText(usuario.getMail());
         etPassword.setText(usuario.getPassword());
+
+         */
 
 
 
