@@ -10,16 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tpo_5_lucero_pedro_29887502.R;
-import com.example.tpo_5_lucero_pedro_29887502.model.LiveDataUsuarioViewModel;
 import com.example.tpo_5_lucero_pedro_29887502.model.Usuario;
-import com.example.tpo_5_lucero_pedro_29887502.request.ApiClient;
 import com.example.tpo_5_lucero_pedro_29887502.ui.registro.RegistroActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private LiveDataUsuarioViewModel liveDataUsuarioViewModel;
     private ViewModelMain viewModelMain;
 
     Usuario usuario;
@@ -40,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private void configView() {
 
         usuario = new Usuario();
-        liveDataUsuarioViewModel = ViewModelProviders.of(this).get(LiveDataUsuarioViewModel.class);
+
         viewModelMain= ViewModelProviders.of(this).get(ViewModelMain.class);
         etMail = findViewById(R.id.etmail_login);
         etPass = findViewById(R.id.etpassword_login);
@@ -87,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModelMain.getEstado().observe(this, estadoObserver);
 
-        liveDataUsuarioViewModel.getUsuario().observe(this, usuarioObserverLogin);
+
 
 
     }//end configView()
